@@ -37,3 +37,4 @@ Output:
 
 1. No Authentication
 2. Simple data processing logic - no special cases were taking in consideration
+> running the client multiple times will incrementally update db, there is no data validation done
