@@ -26,6 +26,13 @@
 > > - Reads [clientEvents.jsonl](client/events/clientEvents.jsonl)
 > > - Sends post request to `/userEvents/:userId` based on parsed data
 
+# Examples:
+Input: [clientEvents.jsonl](client/events/clientEvents.jsonl)
+<img src="examples/data.png">
+
+Output:
+<img src="examples/db.png">
+
 # Corners cut:
 
 1. No Authentication
