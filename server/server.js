@@ -3,8 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const db = require('server/database/database.js');
-
+const db = require('./database/database.js');
+const FSUtils = require('../shared/FSUtils')
+const {calculateUserRevenue} = require("./data_processor");
+const eventsPath = './server/events/serverEvents.jsonl';
 
 const app = express();
 const PORT = 8000;
@@ -15,7 +17,17 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.post('/liveEvent', (req, res) => {
-
+    const event = req.body;
+    if (!event.userId) {
+        res.status(400).json("invalid event");
+    }
+    FSUtils.appendFile(eventsPath, JSON.stringify(event));
+    calculateUserRevenue()
+        .catch((err) => {
+            console.log("error updating user", err);
+            res.status(400).json();
+        })
+    res.status(200).json();
 })
 
 app.get('/userEvents/:userId', async (req, res) => {
@@ -28,7 +40,6 @@ app.get('/userEvents/:userId', async (req, res) => {
         res.status(400).json("Invalid user_id: user with id " + userId + " not found");
     }
 })
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

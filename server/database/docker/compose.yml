@@ -12,7 +12,7 @@ services:
       POSTGRES_USER: appgr8
       POSTGRES_PASSWORD: appgr8
     volumes:
-      - appgr8-db:/var/lib/postgresql/data
+      - appgr8-db:/var/lib/postgresql/events
     networks:
       - appgr8-network
   pgadmin:

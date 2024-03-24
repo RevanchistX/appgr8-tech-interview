@@ -18,13 +18,19 @@ function appendFile(path, line) {
         console.log("ERROR: path and line are required");
         return;
     }
-    fs.appendFile(path, line, {encoding: 'utf-8'}, (err) => {
-        if (err) throw err;
-        console.log("line: " + line + " appended to " + path);
-    });
+    fs.appendFileSync(path, line + "\r\n", {encoding: 'utf-8'});
+}
+
+function unlinkFile(path) {
+    fs.unlink(path, (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(path + ' is deleted.');
+        }
+    })
 }
 
 module.exports = {
-    readFile,
-    appendFile
+    readFile, appendFile, unlinkFile
 }

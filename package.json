@@ -1,14 +1,12 @@
 {
-  "name": "server",
+  "name": "appgr8",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "commonjs",
   "scripts": {
     "db": "docker compose -f server/database/docker/compose.yml up -d",
     "server": "nodemon server/server.js",
-    "client": "nodemon server/server.js",
-    "dev": "npm run db && npm run server && npm run client"
+    "client": "node client/client.js"
   },
   "keywords": [],
   "author": "",
